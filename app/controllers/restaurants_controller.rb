@@ -11,7 +11,7 @@ class RestaurantsController < ApplicationController
 	def create
 		@restaurant = Restaurant.new(params.require(:restaurant).permit(:name, :description, :address, :phone))
 		if @restaurant.save
-			redirect_to restaurant_url
+			redirect_to restaurants_url
 		else
 			render action: "new"
 		end
@@ -34,5 +34,12 @@ class RestaurantsController < ApplicationController
 	def show
 		@restaurant = Restaurant.find(params[:id])
 	end
-	
+
+		def destroy
+		@restaurant = Restaurant.find(params[:id])
+		@restaurant.destroy
+		redirect_to restaurants_url
+	end
+
+
 end
